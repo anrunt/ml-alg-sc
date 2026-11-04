@@ -26,20 +26,20 @@ def backwardPass(X, y_true, y_pred):
 def main():
     w = 0.0
     b = 0.0
-    y_pred = forwardPass(w,b, X)
 
-    print(y_pred)
-    print("MSE: ", MSE(y, y_pred))
+    for epoch in range(1000):
+        y_pred = forwardPass(w,b, X)
 
-    # w and b gradients
-    dw, db = backwardPass(X, y, y_pred)
+        dw, db = backwardPass(X, y, y_pred)
 
-    w = w - learning_rate * dw
-    b = b - learning_rate * db
+        w = w - learning_rate * dw
+        b = b - learning_rate * db
 
+        y_pred_new = forwardPass(w,b,X)
+        print(f"MSE for {epoch}: ", MSE(y, y_pred_new))
 
-    y_pred_new = forwardPass(w,b,X)
-    print("MSE after one backwardPass: ", MSE(y, y_pred_new))
+    print("Final weights: ", w)
+    print("Final bias: ", b)
 
 if __name__ == "__main__":
     main()
