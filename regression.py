@@ -33,14 +33,15 @@ def main():
 
         dw, db = backwardPass(X, y, y_pred)
 
+        if abs(dw) < tolerance and abs(db) < tolerance:
+            break
+
         w = w - learning_rate * dw
         b = b - learning_rate * db
 
         y_pred_new = forwardPass(w,b,X)
         print(f"MSE for {epoch}: ", MSE(y, y_pred_new))
 
-        if abs(dw) < tolerance and abs(db) < tolerance:
-            break
 
     print("Final weights: ", w)
     print("Final bias: ", b)
