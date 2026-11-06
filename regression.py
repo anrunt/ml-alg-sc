@@ -1,6 +1,7 @@
 import numpy as np
 
 learning_rate = 0.01
+tolerance = 0.0001
 
 X = np.array([1.0, 2.0, 3.0, 4.0])
 y = np.array([3.0, 5.0, 7.0, 9.0])
@@ -27,7 +28,7 @@ def main():
     w = 0.0
     b = 0.0
 
-    for epoch in range(1000):
+    for epoch in range(10000):
         y_pred = forwardPass(w,b, X)
 
         dw, db = backwardPass(X, y, y_pred)
@@ -37,6 +38,9 @@ def main():
 
         y_pred_new = forwardPass(w,b,X)
         print(f"MSE for {epoch}: ", MSE(y, y_pred_new))
+
+        if abs(dw) < tolerance and abs(db) < tolerance:
+            break
 
     print("Final weights: ", w)
     print("Final bias: ", b)
