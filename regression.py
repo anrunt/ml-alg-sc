@@ -34,6 +34,7 @@ def main():
         dw, db = backwardPass(X, y, y_pred)
 
         if abs(dw) < tolerance and abs(db) < tolerance:
+            print(f"Converged at epoch {epoch}")
             break
 
         w = w - learning_rate * dw
